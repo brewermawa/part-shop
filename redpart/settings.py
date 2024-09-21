@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from django.utils.translation import gettext_lazy as _
 from oscar.defaults import *
+
+import pysolr
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +29,13 @@ SECRET_KEY = "django-insecure-^i*63(#i-b#p=f2+h&f(-yj^kvkw1sontqvcf((-8pz39-)scv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+]
+
+SOLR_URL = "http://127.0.0.1/solr"
+SOLR_CORE = "redpart"
+SOLR_CONNECTION = pysolr.Solr(SOLR_URL + SOLR_CORE, timeout=10)
 
 
 # Application definition
@@ -179,8 +188,59 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 HAYSTACK_CONNECTIONS = {
     "default": {
-        "ENGINE": "haystack.backends.simple_backend.SimpleEngine",
-    },
+        "ENGINE": "haystack.backends.solr_backend.SolrEngine",
+        "URL": "http://127.0.0.1:8983/solr/redpart",
+        "ADMIN_URL": "http://127.0.0.1:8983/solr/admin/cores",
+        "INCLUDE_SPELLING": True,
+    }
 }
 
 OSCAR_SHOP_NAME = "Red Part"
+
+OSCAR_SEARCH_FACETS = {
+    "fields":{},
+
+    "queries":{
+        "product_class":{
+            "name":_("Product Types"),
+            "field":"product_class",
+            "queries":[
+                (_("T-shirt"), "T-shirt")
+            ]
+        },
+        "rating":{
+            "name":_("Ratings"),
+            "field":"rating",
+            "queries":[
+                (_("1"),"1"),
+                (_("2"),"2"),
+                (_("3"),"3"),
+                (_("4"),"4"),
+                (_("5"),"5"),
+            ]
+        },
+        "price_range":{
+            "name":_("Price Range"),
+            "field": "price",
+            "queries": [
+                (_('0 to 20'),'[0 TO 20]'),
+                (_('20 to 40'),'[20 TO 40]'),
+                (_('40 to 60'),'[40 TO 60]'),
+                (_('60+'),'[60 TO *]'),
+            ]
+        },
+        "color": {
+            "name":_("Color"),
+            "field": "color",
+            "queries": [
+                (_("Green"),"Green"),
+                (_("Grey"),"Grey"),
+                (_("Blue"),"Blue"),
+                (_("Black"),"Black"),
+                (_("Yellow"),"Yellow"),
+                (_("Red"),"Red"),
+                (_("White"),"White"),
+            ]
+        }
+    }
+}
