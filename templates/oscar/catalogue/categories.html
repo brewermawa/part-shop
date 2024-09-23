@@ -56,7 +56,7 @@ C11.2,9.8,11.2,10.4,10.8,10.8z" />
                             </div>
                         </div>
                         <!-- Price -->
-                        <div class="widget-filters__item">
+                        <!--<div class="widget-filters__item">
                             <div class="filter filter--opened" data-collapse-item><button
                                     type="button" class="filter__title"
                                     data-collapse-trigger>Price <span class="filter__arrow"><svg
@@ -81,8 +81,53 @@ C11.2,9.8,11.2,10.4,10.8,10.8z" />
                                     </div>
                                 </div>
                             </div>
+                        </div>-->
+
+                        <div class="widget-filters__item">
+                            <div class="filter filter--opened" data-collapse-item><button
+                                    type="button" class="filter__title"
+                                    data-collapse-trigger>{{ facet_data.price_range.name }} <span class="filter__arrow"><svg
+                                            width="12px" height="7px">
+                                            <path
+                                                d="M0.286,0.273 L0.286,0.273 C-0.070,0.629 -0.075,1.204 0.276,1.565 L5.516,6.993 L10.757,1.565 C11.108,1.204 11.103,0.629 10.747,0.273 L10.747,0.273 C10.385,-0.089 9.796,-0.086 9.437,0.279 L5.516,4.296 L1.596,0.279 C1.237,-0.086 0.648,-0.089 0.286,0.273 Z" />
+                                        </svg></span></button>
+                                <div class="filter__body" data-collapse-content>
+                                    <div class="filter__container">
+                                        <div class="filter-list">
+                                            <div class="filter-list__list">
+                                                {% for result in facet_data.price_range.results %}
+                                                    {% with result.selected as sl %}
+                                                        <label class="filter-list__item">
+                                                            <span class="input-check filter-list__input">
+                                                                <span class="input-check__body">
+                                                                    <input class="input-check__input" type="checkbox" name="{{ result.name }}" {% if sl %}checked{% endif %}>
+                                                                    <span class="input-check__box"></span>
+                                                                    <span class="input-check__icon">
+                                                                        <svg width="9px" height="7px">
+                                                                            <path d="M9,1.395L3.46,7L0,3.5L1.383,2.095L3.46,4.2L7.617,0L9,1.395Z" />
+                                                                        </svg>
+                                                                    </span>
+                                                                </span>
+                                                            </span>
+                                                            <span class="filter-list__title">
+                                                                <a href="{% if sl %}{{ result.deselect_url }}{% else %}{{ result.select_url }}{% endif %}" style="color: #262626">
+                                                                    {{ result.name }}
+                                                                </a>
+                                                            </span>
+                                                            <span class="filter-list__counter">
+                                                                    {{ result.count }}
+                                                            </span>
+                                                        </label>
+                                                    {% endwith %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <!-- Brand -->
+
+                        <!-- Product types -->
                         <div class="widget-filters__item">
                             <div class="filter filter--opened" data-collapse-item><button
                                     type="button" class="filter__title"
@@ -110,14 +155,12 @@ C11.2,9.8,11.2,10.4,10.8,10.8z" />
                                                                 </span>
                                                             </span>
                                                             <span class="filter-list__title">
-                                                                <a href="{% if sl %}{{ result.deselect_url }}{% else %}{{ result.select_url }}{% endif %}">
+                                                                <a href="{% if sl %}{{ result.deselect_url }}{% else %}{{ result.select_url }}{% endif %}" style="color: #262626">
                                                                     {{ result.name }}
                                                                 </a>
                                                             </span>
                                                             <span class="filter-list__counter">
-                                                                
                                                                     {{ result.count }}
-                                                                
                                                             </span>
                                                         </label>
                                                     {% endwith %}
@@ -130,207 +173,187 @@ C11.2,9.8,11.2,10.4,10.8,10.8z" />
                         </div>
                         <!-- Rating -->
                         <div class="widget-filters__item">
-                            <div class="filter filter--opened" data-collapse-item><button
-                                    type="button" class="filter__title"
-                                    data-collapse-trigger>Rating <span
-                                        class="filter__arrow"><svg width="12px" height="7px">
-                                            <path
-                                                d="M0.286,0.273 L0.286,0.273 C-0.070,0.629 -0.075,1.204 0.276,1.565 L5.516,6.993 L10.757,1.565 C11.108,1.204 11.103,0.629 10.747,0.273 L10.747,0.273 C10.385,-0.089 9.796,-0.086 9.437,0.279 L5.516,4.296 L1.596,0.279 C1.237,-0.086 0.648,-0.089 0.286,0.273 Z" />
-                                        </svg></span></button>
+                            <div class="filter filter--opened" data-collapse-item>
+                                <button type="button" class="filter__title" data-collapse-trigger>
+                                    {{ facet_data.rating.name }}
+                                    <span class="filter__arrow">
+                                        <svg width="12px" height="7px">
+                                            <path d="M0.286,0.273 L0.286,0.273 C-0.070,0.629 -0.075,1.204 0.276,1.565 L5.516,6.993 L10.757,1.565 C11.108,1.204 11.103,0.629 10.747,0.273 L10.747,0.273 C10.385,-0.089 9.796,-0.086 9.437,0.279 L5.516,4.296 L1.596,0.279 C1.237,-0.086 0.648,-0.089 0.286,0.273 Z" />
+                                        </svg>
+                                    </span>
+                                </button>
                                 <div class="filter__body" data-collapse-content>
                                     <div class="filter__container">
                                         <div class="filter-rating">
                                             <ul class="filter-rating__list">
-                                                <li class="filter-rating__item"><label
-                                                        class="filter-rating__item-label"><span
-                                                            class="input-check filter-rating__item-input"><span
-                                                                class="input-check__body"><input
-                                                                    class="input-check__input"
-                                                                    type="checkbox"> <span
-                                                                    class="input-check__box"></span>
-                                                                <span
-                                                                    class="input-check__icon"><svg
-                                                                        width="9px"
-                                                                        height="7px">
-                                                                        <path
-                                                                            d="M9,1.395L3.46,7L0,3.5L1.383,2.095L3.46,4.2L7.617,0L9,1.395Z" />
-                                                                    </svg>
-                                                                </span></span></span><span
-                                                            class="filter-rating__item-stars">
-                                                            <div class="rating">
-                                                                <div class="rating__body">
-                                                                    <div
-                                                                        class="rating__star rating__star--active">
+                                                {% for result in facet_data.rating.results %}
+                                                <a href="{{ result.select_url }}">
+                                                    {% if result.name == "5" %}
+                                                        <li class="filter-rating__item">
+                                                            <label class="filter-rating__item-label">
+                                                                <span class="input-check filter-rating__item-input">
+                                                                    <span class="input-check__body">
+                                                                        {% with result.selected as sl %}
+                                                                            <input class="input-check__input" type="checkbox" name="{{ result.name }}" {% if sl %}checked{% endif %}>
+                                                                            <span class="input-check__box"></span>
+                                                                        {% endwith %}
+                                                                        <span class="input-check__icon">
+                                                                            <svg width="9px" height="7px">
+                                                                                <path d="M9,1.395L3.46,7L0,3.5L1.383,2.095L3.46,4.2L7.617,0L9,1.395Z" />
+                                                                            </svg>
+                                                                        </span>
+                                                                    </span>
+                                                                </span>
+                                                                <span class="filter-rating__item-stars">
+                                                                    <div class="rating">
+                                                                        <div class="rating__body">
+                                                                            <div class="rating__star rating__star--active"></div>
+                                                                            <div class="rating__star rating__star--active"></div>
+                                                                            <div class="rating__star rating__star--active"></div>
+                                                                            <div class="rating__star rating__star--active"></div>
+                                                                            <div class="rating__star rating__star--active"></div>
+                                                                        </div>
                                                                     </div>
-                                                                    <div
-                                                                        class="rating__star rating__star--active">
+                                                                </span>
+                                                                <span class="filter-rating__item-title sr-only">5 stars</span>
+                                                                <span class="filter-rating__item-counter">{{ result.count }}</span>
+                                                            </label>
+                                                        </li>
+                                                    {% elif result.name == "4" %}
+                                                        <li class="filter-rating__item">
+                                                            <label class="filter-rating__item-label">
+                                                                <span class="input-check filter-rating__item-input">
+                                                                    <span class="input-check__body">
+                                                                        {% with result.selected as sl %}
+                                                                            <input class="input-check__input" type="checkbox" name="{{ result.name }}" {% if sl %}checked{% endif %}>
+                                                                            <span class="input-check__box"></span>
+                                                                        {% endwith %}
+                                                                        <span class="input-check__icon">
+                                                                            <svg width="9px" height="7px">
+                                                                                <path d="M9,1.395L3.46,7L0,3.5L1.383,2.095L3.46,4.2L7.617,0L9,1.395Z" />
+                                                                            </svg>
+                                                                        </span>
+                                                                    </span>
+                                                                </span>
+                                                                <span class="filter-rating__item-stars">
+                                                                    <div class="rating">
+                                                                        <div class="rating__body">
+                                                                            <div class="rating__star rating__star--active"></div>
+                                                                            <div class="rating__star rating__star--active"></div>
+                                                                            <div class="rating__star rating__star--active"></div>
+                                                                            <div class="rating__star rating__star--active"></div>
+                                                                            <div class="rating__star"></div>
+                                                                        </div>
                                                                     </div>
-                                                                    <div
-                                                                        class="rating__star rating__star--active">
+                                                                </span>
+                                                                <span class="filter-rating__item-title sr-only">4 stars</span>
+                                                                    <span class="filter-rating__item-counter">{{ result.count }}</span></label>
+                                                        </li>
+                                                    {% elif result.name == "3" %}
+                                                        <li class="filter-rating__item">
+                                                            <label class="filter-rating__item-label">
+                                                                <span class="input-check filter-rating__item-input">
+                                                                    <span class="input-check__body">
+                                                                        {% with result.selected as sl %}
+                                                                            <input class="input-check__input" type="checkbox" name="{{ result.name }}" {% if sl %}checked{% endif %}>
+                                                                            <span class="input-check__box"></span>
+                                                                        {% endwith %}
+                                                                        <span class="input-check__icon">
+                                                                            <svg width="9px" height="7px">
+                                                                                <path d="M9,1.395L3.46,7L0,3.5L1.383,2.095L3.46,4.2L7.617,0L9,1.395Z" />
+                                                                            </svg>
+                                                                        </span>
+                                                                    </span>
+                                                                </span>
+                                                                <span class="filter-rating__item-stars">
+                                                                    <div class="rating">
+                                                                        <div class="rating__body">
+                                                                            <div class="rating__star rating__star--active"></div>
+                                                                            <div class="rating__star rating__star--active"></div>
+                                                                            <div class="rating__star rating__star--active"></div>
+                                                                            <div class="rating__star"></div>
+                                                                            <div class="rating__star"></div>
+                                                                        </div>
                                                                     </div>
-                                                                    <div
-                                                                        class="rating__star rating__star--active">
+                                                                </span>
+                                                                <span class="filter-rating__item-title sr-only">3 stars</span>
+                                                                <span class="filter-rating__item-counter">{{ result.count }}</span>
+                                                            </label>
+                                                        </li>
+                                                    {% elif result.name == "2" %}
+                                                        <li class="filter-rating__item"><label
+                                                                class="filter-rating__item-label"><span
+                                                                    class="input-check filter-rating__item-input"><span
+                                                                        class="input-check__body">
+                                                                        {% with result.selected as sl %}
+                                                                            <input class="input-check__input" type="checkbox" name="{{ result.name }}" {% if sl %}checked{% endif %}>
+                                                                            <span class="input-check__box"></span>
+                                                                        {% endwith %}
+                                                                        <span
+                                                                            class="input-check__icon"><svg
+                                                                                width="9px"
+                                                                                height="7px">
+                                                                                <path
+                                                                                    d="M9,1.395L3.46,7L0,3.5L1.383,2.095L3.46,4.2L7.617,0L9,1.395Z" />
+                                                                            </svg>
+                                                                        </span></span></span><span
+                                                                    class="filter-rating__item-stars">
+                                                                    <div class="rating">
+                                                                        <div class="rating__body">
+                                                                            <div
+                                                                                class="rating__star rating__star--active">
+                                                                            </div>
+                                                                            <div
+                                                                                class="rating__star rating__star--active">
+                                                                            </div>
+                                                                            <div class="rating__star">
+                                                                            </div>
+                                                                            <div class="rating__star">
+                                                                            </div>
+                                                                            <div class="rating__star">
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
-                                                                    <div
-                                                                        class="rating__star rating__star--active">
+                                                                </span><span
+                                                                    class="filter-rating__item-title sr-only">2
+                                                                    stars </span><span
+                                                                    class="filter-rating__item-counter">{{ result.count }}</span></label>
+                                                        </li>
+                                                    {% elif result.name == "1" %}
+                                                        <li class="filter-rating__item"><label
+                                                                class="filter-rating__item-label"><span
+                                                                    class="input-check filter-rating__item-input"><span
+                                                                        class="input-check__body">
+                                                                        {% with result.selected as sl %}
+                                                                            <input class="input-check__input" type="checkbox" name="{{ result.name }}" {% if sl %}checked{% endif %}>
+                                                                            <span class="input-check__box"></span>
+                                                                        {% endwith %}
+                                                                        <span
+                                                                            class="input-check__icon"><svg
+                                                                                width="9px"
+                                                                                height="7px">
+                                                                                <path
+                                                                                    d="M9,1.395L3.46,7L0,3.5L1.383,2.095L3.46,4.2L7.617,0L9,1.395Z" />
+                                                                            </svg>
+                                                                        </span></span></span><span
+                                                                    class="filter-rating__item-stars">
+                                                                    <div class="rating">
+                                                                        <div class="rating__body">
+                                                                            <div class="rating__star rating__star--active"></div>
+                                                                            <div class="rating__star"></div>
+                                                                            <div class="rating__star"></div>
+                                                                            <div class="rating__star"></div>
+                                                                            <div class="rating__star"></div>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            </div>
-                                                        </span><span
-                                                            class="filter-rating__item-title sr-only">5
-                                                            stars </span><span
-                                                            class="filter-rating__item-counter">42</span></label>
-                                                </li>
-                                                <li class="filter-rating__item"><label
-                                                        class="filter-rating__item-label"><span
-                                                            class="input-check filter-rating__item-input"><span
-                                                                class="input-check__body"><input
-                                                                    class="input-check__input"
-                                                                    type="checkbox"> <span
-                                                                    class="input-check__box"></span>
-                                                                <span
-                                                                    class="input-check__icon"><svg
-                                                                        width="9px"
-                                                                        height="7px">
-                                                                        <path
-                                                                            d="M9,1.395L3.46,7L0,3.5L1.383,2.095L3.46,4.2L7.617,0L9,1.395Z" />
-                                                                    </svg>
-                                                                </span></span></span><span
-                                                            class="filter-rating__item-stars">
-                                                            <div class="rating">
-                                                                <div class="rating__body">
-                                                                    <div
-                                                                        class="rating__star rating__star--active">
-                                                                    </div>
-                                                                    <div
-                                                                        class="rating__star rating__star--active">
-                                                                    </div>
-                                                                    <div
-                                                                        class="rating__star rating__star--active">
-                                                                    </div>
-                                                                    <div
-                                                                        class="rating__star rating__star--active">
-                                                                    </div>
-                                                                    <div class="rating__star">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </span><span
-                                                            class="filter-rating__item-title sr-only">4
-                                                            stars </span><span
-                                                            class="filter-rating__item-counter">24</span></label>
-                                                </li>
-                                                <li class="filter-rating__item"><label
-                                                        class="filter-rating__item-label"><span
-                                                            class="input-check filter-rating__item-input"><span
-                                                                class="input-check__body"><input
-                                                                    class="input-check__input"
-                                                                    type="checkbox"> <span
-                                                                    class="input-check__box"></span>
-                                                                <span
-                                                                    class="input-check__icon"><svg
-                                                                        width="9px"
-                                                                        height="7px">
-                                                                        <path
-                                                                            d="M9,1.395L3.46,7L0,3.5L1.383,2.095L3.46,4.2L7.617,0L9,1.395Z" />
-                                                                    </svg>
-                                                                </span></span></span><span
-                                                            class="filter-rating__item-stars">
-                                                            <div class="rating">
-                                                                <div class="rating__body">
-                                                                    <div
-                                                                        class="rating__star rating__star--active">
-                                                                    </div>
-                                                                    <div
-                                                                        class="rating__star rating__star--active">
-                                                                    </div>
-                                                                    <div
-                                                                        class="rating__star rating__star--active">
-                                                                    </div>
-                                                                    <div class="rating__star">
-                                                                    </div>
-                                                                    <div class="rating__star">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </span><span
-                                                            class="filter-rating__item-title sr-only">3
-                                                            stars </span><span
-                                                            class="filter-rating__item-counter">19</span></label>
-                                                </li>
-                                                <li class="filter-rating__item"><label
-                                                        class="filter-rating__item-label"><span
-                                                            class="input-check filter-rating__item-input"><span
-                                                                class="input-check__body"><input
-                                                                    class="input-check__input"
-                                                                    type="checkbox"> <span
-                                                                    class="input-check__box"></span>
-                                                                <span
-                                                                    class="input-check__icon"><svg
-                                                                        width="9px"
-                                                                        height="7px">
-                                                                        <path
-                                                                            d="M9,1.395L3.46,7L0,3.5L1.383,2.095L3.46,4.2L7.617,0L9,1.395Z" />
-                                                                    </svg>
-                                                                </span></span></span><span
-                                                            class="filter-rating__item-stars">
-                                                            <div class="rating">
-                                                                <div class="rating__body">
-                                                                    <div
-                                                                        class="rating__star rating__star--active">
-                                                                    </div>
-                                                                    <div
-                                                                        class="rating__star rating__star--active">
-                                                                    </div>
-                                                                    <div class="rating__star">
-                                                                    </div>
-                                                                    <div class="rating__star">
-                                                                    </div>
-                                                                    <div class="rating__star">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </span><span
-                                                            class="filter-rating__item-title sr-only">2
-                                                            stars </span><span
-                                                            class="filter-rating__item-counter">3</span></label>
-                                                </li>
-                                                <li class="filter-rating__item"><label
-                                                        class="filter-rating__item-label"><span
-                                                            class="input-check filter-rating__item-input"><span
-                                                                class="input-check__body"><input
-                                                                    class="input-check__input"
-                                                                    type="checkbox"> <span
-                                                                    class="input-check__box"></span>
-                                                                <span
-                                                                    class="input-check__icon"><svg
-                                                                        width="9px"
-                                                                        height="7px">
-                                                                        <path
-                                                                            d="M9,1.395L3.46,7L0,3.5L1.383,2.095L3.46,4.2L7.617,0L9,1.395Z" />
-                                                                    </svg>
-                                                                </span></span></span><span
-                                                            class="filter-rating__item-stars">
-                                                            <div class="rating">
-                                                                <div class="rating__body">
-                                                                    <div
-                                                                        class="rating__star rating__star--active">
-                                                                    </div>
-                                                                    <div class="rating__star">
-                                                                    </div>
-                                                                    <div class="rating__star">
-                                                                    </div>
-                                                                    <div class="rating__star">
-                                                                    </div>
-                                                                    <div class="rating__star">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </span><span
-                                                            class="filter-rating__item-title sr-only">1
-                                                            star </span><span
-                                                            class="filter-rating__item-counter">12</span></label>
-                                                </li>
+                                                                </span><span
+                                                                    class="filter-rating__item-title sr-only">1
+                                                                    star </span><span
+                                                                    class="filter-rating__item-counter">{{ result.count }}</span></label>
+                                                        </li>
+                                                    {% endif %}
+                                                </a>
+                                                {% endfor %}
                                             </ul>
                                         </div>
                                     </div>
@@ -339,301 +362,184 @@ C11.2,9.8,11.2,10.4,10.8,10.8z" />
                         </div>
                         <!-- Color -->
                         <div class="widget-filters__item">
-                            <div class="filter filter--opened" data-collapse-item><button
-                                    type="button" class="filter__title"
-                                    data-collapse-trigger>Color <span class="filter__arrow"><svg
-                                            width="12px" height="7px">
-                                            <path
-                                                d="M0.286,0.273 L0.286,0.273 C-0.070,0.629 -0.075,1.204 0.276,1.565 L5.516,6.993 L10.757,1.565 C11.108,1.204 11.103,0.629 10.747,0.273 L10.747,0.273 C10.385,-0.089 9.796,-0.086 9.437,0.279 L5.516,4.296 L1.596,0.279 C1.237,-0.086 0.648,-0.089 0.286,0.273 Z" />
-                                        </svg></span></button>
+                            <div class="filter filter--opened" data-collapse-item>
+                                <button type="button" class="filter__title" data-collapse-trigger>{{ facet_data.color.name }}<span class="filter__arrow">
+                                    <svg width="12px" height="7px">
+                                            <path d="M0.286,0.273 L0.286,0.273 C-0.070,0.629 -0.075,1.204 0.276,1.565 L5.516,6.993 L10.757,1.565 C11.108,1.204 11.103,0.629 10.747,0.273 L10.747,0.273 C10.385,-0.089 9.796,-0.086 9.437,0.279 L5.516,4.296 L1.596,0.279 C1.237,-0.086 0.648,-0.089 0.286,0.273 Z" />
+                                        </svg>
+                                    </span>
+                                </button>
                                 <div class="filter__body" data-collapse-content>
                                     <div class="filter__container">
                                         <div class="filter-color">
-                                            <div class="filter-color__list"><label
-                                                    class="filter-color__item"><span
-                                                        class="filter-color__check input-check-color input-check-color--white"
-                                                        style="color: #fff;"><label
-                                                            class="input-check-color__body"><input
-                                                                class="input-check-color__input"
-                                                                type="checkbox"> <span
-                                                                class="input-check-color__box"></span>
-                                                            <span
-                                                                class="input-check-color__icon"><svg
-                                                                    width="12px" height="9px">
-                                                                    <path
-                                                                        d="M12.002,1.396 L4.461,9.002 L-0.002,4.498 L1.383,3.096 L4.461,6.203 L10.617,-0.006 L12.002,1.396 Z" />
-                                                                </svg></span><span
-                                                                class="input-check-color__stick"></span></label></span></label>
-                                                <label class="filter-color__item"><span
-                                                        class="filter-color__check input-check-color input-check-color--light"
-                                                        style="color: #d9d9d9;"><label
-                                                            class="input-check-color__body"><input
-                                                                class="input-check-color__input"
-                                                                type="checkbox"> <span
-                                                                class="input-check-color__box"></span>
-                                                            <span
-                                                                class="input-check-color__icon"><svg
-                                                                    width="12px" height="9px">
-                                                                    <path
-                                                                        d="M12.002,1.396 L4.461,9.002 L-0.002,4.498 L1.383,3.096 L4.461,6.203 L10.617,-0.006 L12.002,1.396 Z" />
-                                                                </svg></span><span
-                                                                class="input-check-color__stick"></span></label></span></label>
-                                                <label class="filter-color__item"><span
-                                                        class="filter-color__check input-check-color"
-                                                        style="color: #b3b3b3;"><label
-                                                            class="input-check-color__body"><input
-                                                                class="input-check-color__input"
-                                                                type="checkbox"> <span
-                                                                class="input-check-color__box"></span>
-                                                            <span
-                                                                class="input-check-color__icon"><svg
-                                                                    width="12px" height="9px">
-                                                                    <path
-                                                                        d="M12.002,1.396 L4.461,9.002 L-0.002,4.498 L1.383,3.096 L4.461,6.203 L10.617,-0.006 L12.002,1.396 Z" />
-                                                                </svg></span><span
-                                                                class="input-check-color__stick"></span></label></span></label>
-                                                <label class="filter-color__item"><span
-                                                        class="filter-color__check input-check-color"
-                                                        style="color: #808080;"><label
-                                                            class="input-check-color__body"><input
-                                                                class="input-check-color__input"
-                                                                type="checkbox"> <span
-                                                                class="input-check-color__box"></span>
-                                                            <span
-                                                                class="input-check-color__icon"><svg
-                                                                    width="12px" height="9px">
-                                                                    <path
-                                                                        d="M12.002,1.396 L4.461,9.002 L-0.002,4.498 L1.383,3.096 L4.461,6.203 L10.617,-0.006 L12.002,1.396 Z" />
-                                                                </svg></span><span
-                                                                class="input-check-color__stick"></span></label></span></label>
-                                                <label class="filter-color__item"><span
-                                                        class="filter-color__check input-check-color"
-                                                        style="color: #666;"><label
-                                                            class="input-check-color__body"><input
-                                                                class="input-check-color__input"
-                                                                type="checkbox"> <span
-                                                                class="input-check-color__box"></span>
-                                                            <span
-                                                                class="input-check-color__icon"><svg
-                                                                    width="12px" height="9px">
-                                                                    <path
-                                                                        d="M12.002,1.396 L4.461,9.002 L-0.002,4.498 L1.383,3.096 L4.461,6.203 L10.617,-0.006 L12.002,1.396 Z" />
-                                                                </svg></span><span
-                                                                class="input-check-color__stick"></span></label></span></label>
-                                                <label class="filter-color__item"><span
-                                                        class="filter-color__check input-check-color"
-                                                        style="color: #4d4d4d;"><label
-                                                            class="input-check-color__body"><input
-                                                                class="input-check-color__input"
-                                                                type="checkbox"> <span
-                                                                class="input-check-color__box"></span>
-                                                            <span
-                                                                class="input-check-color__icon"><svg
-                                                                    width="12px" height="9px">
-                                                                    <path
-                                                                        d="M12.002,1.396 L4.461,9.002 L-0.002,4.498 L1.383,3.096 L4.461,6.203 L10.617,-0.006 L12.002,1.396 Z" />
-                                                                </svg></span><span
-                                                                class="input-check-color__stick"></span></label></span></label>
-                                                <label class="filter-color__item"><span
-                                                        class="filter-color__check input-check-color"
-                                                        style="color: #262626;"><label
-                                                            class="input-check-color__body"><input
-                                                                class="input-check-color__input"
-                                                                type="checkbox"> <span
-                                                                class="input-check-color__box"></span>
-                                                            <span
-                                                                class="input-check-color__icon"><svg
-                                                                    width="12px" height="9px">
-                                                                    <path
-                                                                        d="M12.002,1.396 L4.461,9.002 L-0.002,4.498 L1.383,3.096 L4.461,6.203 L10.617,-0.006 L12.002,1.396 Z" />
-                                                                </svg></span><span
-                                                                class="input-check-color__stick"></span></label></span></label>
-                                                <label class="filter-color__item"><span
-                                                        class="filter-color__check input-check-color"
-                                                        style="color: #ff4040;"><label
-                                                            class="input-check-color__body"><input
-                                                                class="input-check-color__input"
-                                                                type="checkbox"
-                                                                checked="checked"> <span
-                                                                class="input-check-color__box"></span>
-                                                            <span
-                                                                class="input-check-color__icon"><svg
-                                                                    width="12px" height="9px">
-                                                                    <path
-                                                                        d="M12.002,1.396 L4.461,9.002 L-0.002,4.498 L1.383,3.096 L4.461,6.203 L10.617,-0.006 L12.002,1.396 Z" />
-                                                                </svg></span><span
-                                                                class="input-check-color__stick"></span></label></span></label>
-                                                <label class="filter-color__item"><span
-                                                        class="filter-color__check input-check-color"
-                                                        style="color: #ff8126;"><label
-                                                            class="input-check-color__body"><input
-                                                                class="input-check-color__input"
-                                                                type="checkbox"> <span
-                                                                class="input-check-color__box"></span>
-                                                            <span
-                                                                class="input-check-color__icon"><svg
-                                                                    width="12px" height="9px">
-                                                                    <path
-                                                                        d="M12.002,1.396 L4.461,9.002 L-0.002,4.498 L1.383,3.096 L4.461,6.203 L10.617,-0.006 L12.002,1.396 Z" />
-                                                                </svg></span><span
-                                                                class="input-check-color__stick"></span></label></span></label>
-                                                <label class="filter-color__item"><span
-                                                        class="filter-color__check input-check-color input-check-color--light"
-                                                        style="color: #ffd440;"><label
-                                                            class="input-check-color__body"><input
-                                                                class="input-check-color__input"
-                                                                type="checkbox"> <span
-                                                                class="input-check-color__box"></span>
-                                                            <span
-                                                                class="input-check-color__icon"><svg
-                                                                    width="12px" height="9px">
-                                                                    <path
-                                                                        d="M12.002,1.396 L4.461,9.002 L-0.002,4.498 L1.383,3.096 L4.461,6.203 L10.617,-0.006 L12.002,1.396 Z" />
-                                                                </svg></span><span
-                                                                class="input-check-color__stick"></span></label></span></label>
-                                                <label class="filter-color__item"><span
-                                                        class="filter-color__check input-check-color input-check-color--light"
-                                                        style="color: #becc1f;"><label
-                                                            class="input-check-color__body"><input
-                                                                class="input-check-color__input"
-                                                                type="checkbox"> <span
-                                                                class="input-check-color__box"></span>
-                                                            <span
-                                                                class="input-check-color__icon"><svg
-                                                                    width="12px" height="9px">
-                                                                    <path
-                                                                        d="M12.002,1.396 L4.461,9.002 L-0.002,4.498 L1.383,3.096 L4.461,6.203 L10.617,-0.006 L12.002,1.396 Z" />
-                                                                </svg></span><span
-                                                                class="input-check-color__stick"></span></label></span></label>
-                                                <label class="filter-color__item"><span
-                                                        class="filter-color__check input-check-color"
-                                                        style="color: #8fcc14;"><label
-                                                            class="input-check-color__body"><input
-                                                                class="input-check-color__input"
-                                                                type="checkbox"
-                                                                checked="checked"> <span
-                                                                class="input-check-color__box"></span>
-                                                            <span
-                                                                class="input-check-color__icon"><svg
-                                                                    width="12px" height="9px">
-                                                                    <path
-                                                                        d="M12.002,1.396 L4.461,9.002 L-0.002,4.498 L1.383,3.096 L4.461,6.203 L10.617,-0.006 L12.002,1.396 Z" />
-                                                                </svg></span><span
-                                                                class="input-check-color__stick"></span></label></span></label>
-                                                <label class="filter-color__item"><span
-                                                        class="filter-color__check input-check-color"
-                                                        style="color: #47cc5e;"><label
-                                                            class="input-check-color__body"><input
-                                                                class="input-check-color__input"
-                                                                type="checkbox"> <span
-                                                                class="input-check-color__box"></span>
-                                                            <span
-                                                                class="input-check-color__icon"><svg
-                                                                    width="12px" height="9px">
-                                                                    <path
-                                                                        d="M12.002,1.396 L4.461,9.002 L-0.002,4.498 L1.383,3.096 L4.461,6.203 L10.617,-0.006 L12.002,1.396 Z" />
-                                                                </svg></span><span
-                                                                class="input-check-color__stick"></span></label></span></label>
-                                                <label class="filter-color__item"><span
-                                                        class="filter-color__check input-check-color"
-                                                        style="color: #47cca0;"><label
-                                                            class="input-check-color__body"><input
-                                                                class="input-check-color__input"
-                                                                type="checkbox"> <span
-                                                                class="input-check-color__box"></span>
-                                                            <span
-                                                                class="input-check-color__icon"><svg
-                                                                    width="12px" height="9px">
-                                                                    <path
-                                                                        d="M12.002,1.396 L4.461,9.002 L-0.002,4.498 L1.383,3.096 L4.461,6.203 L10.617,-0.006 L12.002,1.396 Z" />
-                                                                </svg></span><span
-                                                                class="input-check-color__stick"></span></label></span></label>
-                                                <label class="filter-color__item"><span
-                                                        class="filter-color__check input-check-color"
-                                                        style="color: #47cccc;"><label
-                                                            class="input-check-color__body"><input
-                                                                class="input-check-color__input"
-                                                                type="checkbox"> <span
-                                                                class="input-check-color__box"></span>
-                                                            <span
-                                                                class="input-check-color__icon"><svg
-                                                                    width="12px" height="9px">
-                                                                    <path
-                                                                        d="M12.002,1.396 L4.461,9.002 L-0.002,4.498 L1.383,3.096 L4.461,6.203 L10.617,-0.006 L12.002,1.396 Z" />
-                                                                </svg></span><span
-                                                                class="input-check-color__stick"></span></label></span></label>
-                                                <label class="filter-color__item"><span
-                                                        class="filter-color__check input-check-color"
-                                                        style="color: #40bfff;"><label
-                                                            class="input-check-color__body"><input
-                                                                class="input-check-color__input"
-                                                                type="checkbox"
-                                                                disabled="disabled"> <span
-                                                                class="input-check-color__box"></span>
-                                                            <span
-                                                                class="input-check-color__icon"><svg
-                                                                    width="12px" height="9px">
-                                                                    <path
-                                                                        d="M12.002,1.396 L4.461,9.002 L-0.002,4.498 L1.383,3.096 L4.461,6.203 L10.617,-0.006 L12.002,1.396 Z" />
-                                                                </svg></span><span
-                                                                class="input-check-color__stick"></span></label></span></label>
-                                                <label class="filter-color__item"><span
-                                                        class="filter-color__check input-check-color"
-                                                        style="color: #3d6dcc;"><label
-                                                            class="input-check-color__body"><input
-                                                                class="input-check-color__input"
-                                                                type="checkbox"
-                                                                checked="checked"> <span
-                                                                class="input-check-color__box"></span>
-                                                            <span
-                                                                class="input-check-color__icon"><svg
-                                                                    width="12px" height="9px">
-                                                                    <path
-                                                                        d="M12.002,1.396 L4.461,9.002 L-0.002,4.498 L1.383,3.096 L4.461,6.203 L10.617,-0.006 L12.002,1.396 Z" />
-                                                                </svg></span><span
-                                                                class="input-check-color__stick"></span></label></span></label>
-                                                <label class="filter-color__item"><span
-                                                        class="filter-color__check input-check-color"
-                                                        style="color: #7766cc;"><label
-                                                            class="input-check-color__body"><input
-                                                                class="input-check-color__input"
-                                                                type="checkbox"> <span
-                                                                class="input-check-color__box"></span>
-                                                            <span
-                                                                class="input-check-color__icon"><svg
-                                                                    width="12px" height="9px">
-                                                                    <path
-                                                                        d="M12.002,1.396 L4.461,9.002 L-0.002,4.498 L1.383,3.096 L4.461,6.203 L10.617,-0.006 L12.002,1.396 Z" />
-                                                                </svg></span><span
-                                                                class="input-check-color__stick"></span></label></span></label>
-                                                <label class="filter-color__item"><span
-                                                        class="filter-color__check input-check-color"
-                                                        style="color: #b852cc;"><label
-                                                            class="input-check-color__body"><input
-                                                                class="input-check-color__input"
-                                                                type="checkbox"> <span
-                                                                class="input-check-color__box"></span>
-                                                            <span
-                                                                class="input-check-color__icon"><svg
-                                                                    width="12px" height="9px">
-                                                                    <path
-                                                                        d="M12.002,1.396 L4.461,9.002 L-0.002,4.498 L1.383,3.096 L4.461,6.203 L10.617,-0.006 L12.002,1.396 Z" />
-                                                                </svg></span><span
-                                                                class="input-check-color__stick"></span></label></span></label>
-                                                <label class="filter-color__item"><span
-                                                        class="filter-color__check input-check-color"
-                                                        style="color: #e53981;"><label
-                                                            class="input-check-color__body"><input
-                                                                class="input-check-color__input"
-                                                                type="checkbox"> <span
-                                                                class="input-check-color__box"></span>
-                                                            <span
-                                                                class="input-check-color__icon"><svg
-                                                                    width="12px" height="9px">
-                                                                    <path
-                                                                        d="M12.002,1.396 L4.461,9.002 L-0.002,4.498 L1.383,3.096 L4.461,6.203 L10.617,-0.006 L12.002,1.396 Z" />
-                                                                </svg></span><span
-                                                                class="input-check-color__stick"></span></label></span></label>
+                                            <div class="filter-color__list">
+                                                {% for result in facet_data.color.results %}
+                                                    {% if result.name == "White" %}
+                                                        {% if result.selected %}
+                                                            <a href="{{ result.deselect_url }}">
+                                                        {% else %}
+                                                            <a href="{{ result.select_url }}">
+                                                        {% endif %}
+                                                        
+
+                                                            <label class="filter-color__item">
+                                                                <span class="filter-color__check input-check-color input-check-color--white"style="color: white;">
+                                                                    <label class="input-check-color__body">
+                                                                        {% with result.selected as sl %}
+                                                                            <input class="input-check-color__input" name="{{ result.name }}" {% if sl %}type="checkbox" checked{% endif %}>
+                                                                        {% endwith %}
+                                                                        <span class="input-check-color__box"></span>
+                                                                        <span class="input-check-color__icon">
+                                                                            <svg width="12px" height="9px">
+                                                                                <path d="M12.002,1.396 L4.461,9.002 L-0.002,4.498 L1.383,3.096 L4.461,6.203 L10.617,-0.006 L12.002,1.396 Z" />
+                                                                            </svg>
+                                                                        </span>
+                                                                        <span class="input-check-color__stick"></span>
+                                                                    </label>
+                                                                </span>
+                                                            </label>
+                                                        </a>
+                                                    {% elif result.name == "Grey" %}
+                                                        {% if result.selected %}
+                                                            <a href="{{ result.deselect_url }}">
+                                                        {% else %}
+                                                            <a href="{{ result.select_url }}">
+                                                        {% endif %}
+                                                            <label class="filter-color__item">
+                                                                <span class="filter-color__check input-check-color input-check-color--light" style="color: lightgray;">
+                                                                    <label class="input-check-color__body">
+                                                                        {% with result.selected as sl %}
+                                                                            <input class="input-check-color__input" name="{{ result.name }}" {% if sl %}type="checkbox" checked{% endif %}>
+                                                                        {% endwith %}
+                                                                        <span class="input-check-color__box"></span>
+                                                                        <span class="input-check-color__icon">
+                                                                            <svg width="12px" height="9px">
+                                                                                <path d="M12.002,1.396 L4.461,9.002 L-0.002,4.498 L1.383,3.096 L4.461,6.203 L10.617,-0.006 L12.002,1.396 Z" />
+                                                                            </svg>
+                                                                        </span>
+                                                                        <span class="input-check-color__stick"></span>
+                                                                    </label>
+                                                                </span>
+                                                            </label>
+                                                        </a>
+                                                    {% elif result.name == "Black" %}
+                                                        {% if result.selected %}
+                                                            <a href="{{ result.deselect_url }}">
+                                                        {% else %}
+                                                            <a href="{{ result.select_url }}">
+                                                        {% endif %}
+                                                            <label class="filter-color__item">
+                                                                <span class="filter-color__check input-check-color input-check-color--light" style="color: black;">
+                                                                    <label class="input-check-color__body">
+                                                                        {% with result.selected as sl %}
+                                                                            <input class="input-check-color__input" name="{{ result.name }}" {% if sl %}type="checkbox" checked{% endif %}>
+                                                                        {% endwith %}
+                                                                        <span class="input-check-color__box"></span>
+                                                                        <span class="input-check-color__icon">
+                                                                            <svg width="12px" height="9px">
+                                                                                <path d="M12.002,1.396 L4.461,9.002 L-0.002,4.498 L1.383,3.096 L4.461,6.203 L10.617,-0.006 L12.002,1.396 Z" />
+                                                                            </svg>
+                                                                        </span>
+                                                                        <span class="input-check-color__stick"></span>
+                                                                    </label>
+                                                                </span>
+                                                            </label>
+                                                        </a>
+                                                    {% elif result.name == "Red" %}
+                                                        {% if result.selected %}
+                                                            <a href="{{ result.deselect_url }}">
+                                                        {% else %}
+                                                            <a href="{{ result.select_url }}">
+                                                        {% endif %}
+                                                            <label class="filter-color__item">
+                                                                <span class="filter-color__check input-check-color input-check-color--light" style="color: red;">
+                                                                    <label class="input-check-color__body">
+                                                                        {% with result.selected as sl %}
+                                                                            <input class="input-check-color__input" name="{{ result.name }}" {% if sl %}type="checkbox" checked{% endif %}>
+                                                                        {% endwith %}
+                                                                        <span class="input-check-color__box"></span>
+                                                                        <span class="input-check-color__icon">
+                                                                            <svg width="12px" height="9px">
+                                                                                <path d="M12.002,1.396 L4.461,9.002 L-0.002,4.498 L1.383,3.096 L4.461,6.203 L10.617,-0.006 L12.002,1.396 Z" />
+                                                                            </svg>
+                                                                        </span>
+                                                                        <span class="input-check-color__stick"></span>
+                                                                    </label>
+                                                                </span>
+                                                            </label>
+                                                        </a>
+                                                    {% elif result.name == "Green" %}
+                                                    <!-- Green -->
+                                                        {% if result.selected %}
+                                                            <a href="{{ result.deselect_url }}">
+                                                        {% else %}
+                                                            <a href="{{ result.select_url }}">
+                                                        {% endif %}
+                                                            <label class="filter-color__item">
+                                                                <span class="filter-color__check input-check-color input-check-color--light" style="color: green;">
+                                                                    <label class="input-check-color__body">
+                                                                        {% with result.selected as sl %}
+                                                                            <input class="input-check-color__input" name="{{ result.name }}" {% if sl %}type="checkbox" checked{% endif %}>
+                                                                        {% endwith %}
+                                                                        <span class="input-check-color__box"></span>
+                                                                        <span class="input-check-color__icon">
+                                                                            <svg width="12px" height="9px">
+                                                                                <path d="M12.002,1.396 L4.461,9.002 L-0.002,4.498 L1.383,3.096 L4.461,6.203 L10.617,-0.006 L12.002,1.396 Z" />
+                                                                            </svg>
+                                                                        </span>
+                                                                        <span class="input-check-color__stick"></span>
+                                                                    </label>
+                                                                </span>
+                                                            </label>
+                                                        </a>
+                                                    {% elif result.name == "Blue" %}
+                                                        {% if result.selected %}
+                                                            <a href="{{ result.deselect_url }}">
+                                                        {% else %}
+                                                            <a href="{{ result.select_url }}">
+                                                        {% endif %}
+                                                            <label class="filter-color__item">
+                                                                <span class="filter-color__check input-check-color input-check-color--light" style="color: blue;">
+                                                                    <label class="input-check-color__body">
+                                                                        {% with result.selected as sl %}
+                                                                            <input class="input-check-color__input" name="{{ result.name }}" {% if sl %}type="checkbox" checked{% endif %}>
+                                                                        {% endwith %}
+                                                                        <span class="input-check-color__box"></span>
+                                                                        <span class="input-check-color__icon">
+                                                                            <svg width="12px" height="9px">
+                                                                                <path d="M12.002,1.396 L4.461,9.002 L-0.002,4.498 L1.383,3.096 L4.461,6.203 L10.617,-0.006 L12.002,1.396 Z" />
+                                                                            </svg>
+                                                                        </span>
+                                                                        <span class="input-check-color__stick"></span>
+                                                                    </label>
+                                                                </span>
+                                                            </label>
+                                                        </a>
+                                                    {% elif result.name == "Yellow" %}
+                                                        {% if result.selected %}
+                                                            <a href="{{ result.deselect_url }}">
+                                                        {% else %}
+                                                            <a href="{{ result.select_url }}">
+                                                        {% endif %}
+                                                            <label class="filter-color__item">
+                                                                <span class="filter-color__check input-check-color input-check-color--light" style="color: yellow;">
+                                                                    <label class="input-check-color__body">
+                                                                        {% with result.selected as sl %}
+                                                                            <input class="input-check-color__input" name="{{ result.name }}" {% if sl %}type="checkbox" checked{% endif %}>
+                                                                        {% endwith %}
+                                                                        <span class="input-check-color__box"></span>
+                                                                        <span class="input-check-color__icon">
+                                                                            <svg width="12px" height="9px">
+                                                                                <path d="M12.002,1.396 L4.461,9.002 L-0.002,4.498 L1.383,3.096 L4.461,6.203 L10.617,-0.006 L12.002,1.396 Z" />
+                                                                            </svg>
+                                                                        </span>
+                                                                        <span class="input-check-color__stick"></span>
+                                                                    </label>
+                                                                </span>
+                                                            </label>
+                                                        </a>
+                                                    {% endif %}
+                                                {% endfor %}
                                             </div>
                                         </div>
                                     </div>
@@ -642,9 +548,6 @@ C11.2,9.8,11.2,10.4,10.8,10.8z" />
                         </div>
                         
                     </div>
-                    <div class="widget-filters__actions d-flex"><button
-                            class="btn btn-primary btn-sm">Filter</button> <button
-                            class="btn btn-secondary btn-sm">Reset</button></div>
                 </div>
                 <div class="card widget widget-products d-none d-lg-block">
                     <div class="widget__header">

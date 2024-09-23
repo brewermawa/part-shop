@@ -27,7 +27,7 @@ l0.6-0.6C9.3,2.4,10.3,2,11.3,2c1,0,1.9,0.4,2.6,1.1C15.4,4.6,15.4,6.9,13.9,8.4z" 
                 </svg></button></div>
         <div class="product-card__image">
             <div class="image image--type--product">
-                {% with image=product.primary_image  %}
+                {% with image=product.primary_image %}
                     <a href="{{ product.get_absolute_url }}" class="image__body">
                         {% oscar_thumbnail image.original "x155" upscale=False as thumb %}
                         <img class="image__tag" src="{{ thumb.url }}" alt="">
@@ -77,7 +77,7 @@ l0.6-0.6C9.3,2.4,10.3,2,11.3,2c1,0,1.9,0.4,2.6,1.1C15.4,4.6,15.4,6.9,13.9,8.4z" 
                         {% else %}
                             {% for _ in "x"|rjust:5 %}
                                 <div class="rating__star"></div>
-                            {% endfor%}
+                            {% endfor %}
                         {% endif %}
                     </div>
                 </div>

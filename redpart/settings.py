@@ -205,7 +205,11 @@ OSCAR_SEARCH_FACETS = {
             "name":_("Product Types"),
             "field":"product_class",
             "queries":[
-                (_("T-shirt"), "T-shirt")
+                (_("T-shirt"), "T-shirt"),
+                (_("Book"), "Book"),
+                (_("Color"), "Color"),
+                (_("Material"), "Material"),
+                (_("Material and color"), "Material and color"),
             ]
         },
         "rating":{
@@ -233,13 +237,13 @@ OSCAR_SEARCH_FACETS = {
             "name":_("Color"),
             "field": "color",
             "queries": [
-                (_("Green"),"Green"),
-                (_("Grey"),"Grey"),
-                (_("Blue"),"Blue"),
-                (_("Black"),"Black"),
-                (_("Yellow"),"Yellow"),
-                (_("Red"),"Red"),
                 (_("White"),"White"),
+                (_("Grey"),"Grey"),
+                (_("Black"),"Black"),
+                (_("Red"),"Red"),
+                (_("Green"),"Green"),
+                (_("Blue"),"Blue"),
+                (_("Yellow"),"Yellow"),
             ]
         }
     }
